@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entreprise de Formation</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"-->
   <link rel="stylesheet" type="text/css" href="css/webfonts/all.css">
   <link rel="stylesheet" href="./styles/app.css">
   <title>My Website</title>
@@ -342,6 +345,89 @@
             <a href="menu/expertise.php/formation-et-certification" class="btn btn-en-savoir-plus">En savoir plus</a>
             </div>
         </div>
+
+        <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+               
+                        <button id="openChat" class="btn btn-primary mb-3">Ouvrir le Chatbot</button>
+                        <div id="chatbox" style="display: none;">
+                        <div class="card">
+                    <div class="card-header">
+                        votre titre 
+                        <button id="closeChat" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                            <div id="chat-messages" class="mb-3"></div>
+                            <div class="input-group">
+                                <input type="text" id="user-input" class="form-control" placeholder="Tapez votre message ici...">
+                                <div class="input-group-append">
+                                    <button id="send-button" class="btn btn-primary">Envoyer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+// code javascript
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatbox = document.getElementById("chatbox");
+            const openChatButton = document.getElementById("openChat");
+            const closeChatButton = document.getElementById("closeChat");
+            const chatMessages = document.getElementById("chat-messages");
+            const userInput = document.getElementById("user-input");
+            const sendButton = document.getElementById("send-button");
+
+            openChatButton.addEventListener("click", function () {
+                chatbox.style.display = "block";
+            });
+
+            closeChatButton.addEventListener("click", function () {
+                chatbox.style.display = "none";
+                chatMessages.innerHTML = ""; // Efface la discussion
+            });
+
+            sendButton.addEventListener("click", function () {
+                const userMessage = userInput.value;
+                sendMessage(userMessage, "user");
+                userInput.value = ""; // Efface le contenu de la zone de texte
+
+                // Envoyez la question à votre API de chatbot et affichez la réponse.
+                // Remplacez cette partie par un appel à votre propre API de chatbot.
+                // Ici, nous simulons une réponse du chatbot.
+                simulateChatbotResponse(userMessage);
+            });
+
+            // Fonction pour envoyer un message et l'afficher dans la fenêtre de chat.
+            function sendMessage(message, sender) {
+                const messageDiv = document.createElement("div");
+                messageDiv.className = sender === "user" ? "user-message" : "bot-message";
+                messageDiv.textContent = message;
+                chatMessages.appendChild(messageDiv);
+            }
+
+            // Fonction de simulation de la réponse du chatbot (remplacez cette partie par un appel à votre propre API de chatbot).
+            function simulateChatbotResponse(userMessage) {
+                // Simuler une réponse en fonction de la question.
+                let botResponse = "Je suis un chatbot factice.";
+                if (userMessage.toLowerCase().includes("horaires,")
+                  || userMessage.toLowerCase().includes("heure")) {
+                    botResponse = "Les horaires sont de 8h à 17h du lundi au vendredi.";
+                } else if (userMessage.toLowerCase().includes("cours")) {
+                    botResponse = "Nous proposons une variété de cours en informatique, y compris la programmation, la conception web, et plus encore.";
+                } else if (userMessage.toLowerCase().includes("contact")) {
+                    botResponse = "Vous pouvez nous contacter à contact@ecoleinformatique.com.";
+                }
+
+                sendMessage(botResponse, "bot");
+            }
+        });
+    </script>
     </div>
     <p>Qui sommes-nous?</p>
 
@@ -480,6 +566,7 @@
           <p> <i class="fa fa-phone"></i>&nbsp(+221) 33 824 10 60</p>
           <p> <i class="fa fa-mobile"></i>&nbsp(+221) 77 466 71 63</p>
           <p> <i class="fa fa-envelope-open"></i>&nbsprtn@rtn.sn</p>
+         
         </div>
         <div id="chat-container">
           <form id="chat-form">
